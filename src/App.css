@@ -1,0 +1,52 @@
+body,
+html,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+ul,
+ol {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+}
+
+ul,
+ol li a {
+  text-decoration: none;
+  color: #fff;
+}
+
+li {
+  font-size: 1.2rem;
+}
+
+li a {
+  color: #ff6a00;
+}
+
+li a:hover {
+  color: #ffaa33;
+
+}
+
+.glass-box {
+  width: 250px;
+  height: 250px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(255, 102, 0, 0.9);
+  backdrop-filter: blur(12px);
+  position: relative;
+  overflow: hidden;
+  transition: .3s ease-in-out;
+}
+
+.glass-box:hover {
+  box-shadow: 0 0px 42px rgba(255, 140, 0, 1);
+  scale: 1.05;
+  cursor: pointer;
+}

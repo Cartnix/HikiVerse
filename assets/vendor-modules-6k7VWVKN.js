@@ -17,35 +17,6 @@ function _mergeNamespaces(n, m) {
   }
   return Object.freeze(Object.defineProperty(n, Symbol.toStringTag, { value: "Module" }));
 }
-(function polyfill() {
-  const relList = document.createElement("link").relList;
-  if (relList && relList.supports && relList.supports("modulepreload")) return;
-  for (const link of document.querySelectorAll('link[rel="modulepreload"]')) processPreload(link);
-  new MutationObserver((mutations) => {
-    for (const mutation of mutations) {
-      if (mutation.type !== "childList") continue;
-      for (const node2 of mutation.addedNodes) if (node2.tagName === "LINK" && node2.rel === "modulepreload") processPreload(node2);
-    }
-  }).observe(document, {
-    childList: true,
-    subtree: true
-  });
-  function getFetchOpts(link) {
-    const fetchOpts = {};
-    if (link.integrity) fetchOpts.integrity = link.integrity;
-    if (link.referrerPolicy) fetchOpts.referrerPolicy = link.referrerPolicy;
-    if (link.crossOrigin === "use-credentials") fetchOpts.credentials = "include";
-    else if (link.crossOrigin === "anonymous") fetchOpts.credentials = "omit";
-    else fetchOpts.credentials = "same-origin";
-    return fetchOpts;
-  }
-  function processPreload(link) {
-    if (link.ep) return;
-    link.ep = true;
-    const fetchOpts = getFetchOpts(link);
-    fetch(link.href, fetchOpts);
-  }
-})();
 function getDefaultExportFromCjs(x) {
   return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, "default") ? x["default"] : x;
 }
@@ -13310,10 +13281,10 @@ function useGlobalCache(prefix2, keyPath, cacheFn, onCacheRemove, onCacheEffect)
   var cacheContent = cacheEntity[1];
   useCompatibleInsertionEffect(function() {
     onCacheEffect === null || onCacheEffect === void 0 || onCacheEffect(cacheContent);
-  }, function(polyfill2) {
+  }, function(polyfill) {
     buildCache(function(_ref3) {
       var _ref4 = _slicedToArray$1(_ref3, 2), times = _ref4[0], cache2 = _ref4[1];
-      if (polyfill2 && times === 0) {
+      if (polyfill && times === 0) {
         onCacheEffect === null || onCacheEffect === void 0 || onCacheEffect(cacheContent);
       }
       return [times + 1, cache2];
@@ -13324,7 +13295,7 @@ function useGlobalCache(prefix2, keyPath, cacheFn, onCacheRemove, onCacheEffect)
         var nextCount = times - 1;
         if (nextCount === 0) {
           register2(function() {
-            if (polyfill2 || !globalCache.opGet(fullPathStr)) {
+            if (polyfill || !globalCache.opGet(fullPathStr)) {
               onCacheRemove === null || onCacheRemove === void 0 || onCacheRemove(cache2, false);
             }
           });
@@ -14698,18 +14669,17 @@ class FastColor {
     }
     if (!input) ;
     else if (typeof input === "string") {
-      let matchPrefix2 = function(prefix2) {
+      let matchPrefix = function(prefix2) {
         return trimStr.startsWith(prefix2);
       };
-      var matchPrefix = matchPrefix2;
       const trimStr = input.trim();
       if (/^#?[A-F\d]{3,8}$/i.test(trimStr)) {
         this.fromHexString(trimStr);
-      } else if (matchPrefix2("rgb")) {
+      } else if (matchPrefix("rgb")) {
         this.fromRgbString(trimStr);
-      } else if (matchPrefix2("hsl")) {
+      } else if (matchPrefix("hsl")) {
         this.fromHslString(trimStr);
-      } else if (matchPrefix2("hsv") || matchPrefix2("hsb")) {
+      } else if (matchPrefix("hsv") || matchPrefix("hsb")) {
         this.fromHsvString(trimStr);
       }
     } else if (input instanceof FastColor) {
@@ -18771,7 +18741,7 @@ const prepareComponentToken$5 = (token2) => ({
   contentBg: token2.colorBgElevated,
   contentPadding: `${(token2.controlHeightLG - token2.fontSize * token2.lineHeight) / 2}px ${token2.paddingSM}px`
 });
-const useStyle$9 = genStyleHooks("Message", (token2) => {
+const useStyle$8 = genStyleHooks("Message", (token2) => {
   const combinedToken = merge$1(token2, {
     height: 150
   });
@@ -18813,7 +18783,7 @@ const PurePanel$3 = (props) => {
   } = reactExports.useContext(ConfigContext);
   const prefixCls = staticPrefixCls || getPrefixCls("message");
   const rootCls = useCSSVarCls(prefixCls);
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle$9(prefixCls, rootCls);
+  const [wrapCSSVar, hashId, cssVarCls] = useStyle$8(prefixCls, rootCls);
   return wrapCSSVar(/* @__PURE__ */ reactExports.createElement(Notify, Object.assign({}, restProps, {
     prefixCls,
     className: classNames(className, hashId, `${prefixCls}-notice-pure-panel`, cssVarCls, rootCls),
@@ -18860,7 +18830,7 @@ const Wrapper$1 = ({
   prefixCls
 }) => {
   const rootCls = useCSSVarCls(prefixCls);
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle$9(prefixCls, rootCls);
+  const [wrapCSSVar, hashId, cssVarCls] = useStyle$8(prefixCls, rootCls);
   return wrapCSSVar(/* @__PURE__ */ reactExports.createElement(NotificationProvider, {
     classNames: {
       list: classNames(hashId, cssVarCls, rootCls)
@@ -19453,7 +19423,7 @@ const genWaveStyle = (token2) => {
     }
   };
 };
-const useStyle$8 = genComponentStyleHook("Wave", (token2) => [genWaveStyle(token2)]);
+const useStyle$7 = genComponentStyleHook("Wave", (token2) => [genWaveStyle(token2)]);
 const TARGET_CLS = `${defaultPrefixCls}-wave-target`;
 function isValidWaveColor(color) {
   return color && color !== "#fff" && color !== "#ffffff" && color !== "rgb(255, 255, 255)" && color !== "rgba(255, 255, 255, 1)" && !/rgba\((?:\d*, ){3}0\)/.test(color) && // any transparent rgba color
@@ -19639,7 +19609,7 @@ const Wave = (props) => {
   } = reactExports.useContext(ConfigContext);
   const containerRef = reactExports.useRef(null);
   const prefixCls = getPrefixCls("wave");
-  const [, hashId] = useStyle$8(prefixCls);
+  const [, hashId] = useStyle$7(prefixCls);
   const showWave = useWave(containerRef, classNames(prefixCls, hashId), component);
   React.useEffect(() => {
     const node2 = containerRef.current;
@@ -19764,7 +19734,7 @@ const genSpaceGapStyle = (token2) => {
     }
   };
 };
-const useStyle$7 = genStyleHooks("Space", (token2) => {
+const useStyle$6 = genStyleHooks("Space", (token2) => {
   const spaceToken = merge$1(token2, {
     spaceGapSmallSize: token2.paddingXS,
     spaceGapMiddleSize: token2.padding,
@@ -19841,7 +19811,7 @@ const Compact$1 = (props) => {
   } = props, restProps = __rest$b(props, ["size", "direction", "block", "prefixCls", "className", "rootClassName", "children"]);
   const mergedSize = useSize((ctx) => size !== null && size !== void 0 ? size : ctx);
   const prefixCls = getPrefixCls("space-compact", customizePrefixCls);
-  const [wrapCSSVar, hashId] = useStyle$7(prefixCls);
+  const [wrapCSSVar, hashId] = useStyle$6(prefixCls);
   const clx = classNames(prefixCls, hashId, {
     [`${prefixCls}-rtl`]: directionConfig === "rtl",
     [`${prefixCls}-block`]: block,
@@ -21058,7 +21028,7 @@ const genBlockButtonStyle = (token2) => {
     }
   };
 };
-const useStyle$6 = genStyleHooks("Button", (token2) => {
+const useStyle$5 = genStyleHooks("Button", (token2) => {
   const buttonToken = prepareToken$1(token2);
   return [
     // Shared
@@ -21309,7 +21279,7 @@ const InternalCompoundedButton = /* @__PURE__ */ React.forwardRef((props, ref) =
   } = useComponentConfig("button");
   const mergedInsertSpace = (_a = autoInsertSpace !== null && autoInsertSpace !== void 0 ? autoInsertSpace : contextAutoInsertSpace) !== null && _a !== void 0 ? _a : true;
   const prefixCls = getPrefixCls("btn", customizePrefixCls);
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle$6(prefixCls);
+  const [wrapCSSVar, hashId, cssVarCls] = useStyle$5(prefixCls);
   const disabled = reactExports.useContext(DisabledContext);
   const mergedDisabled = customDisabled !== null && customDisabled !== void 0 ? customDisabled : disabled;
   const groupSize = reactExports.useContext(GroupSizeContext);
@@ -21890,12 +21860,12 @@ var Panel = /* @__PURE__ */ React.forwardRef(function(props, ref) {
       }
     };
   });
-  var contentStyle2 = {};
+  var contentStyle = {};
   if (width !== void 0) {
-    contentStyle2.width = width;
+    contentStyle.width = width;
   }
   if (height !== void 0) {
-    contentStyle2.height = height;
+    contentStyle.height = height;
   }
   var footerNode = footer ? /* @__PURE__ */ React.createElement("div", {
     className: classNames("".concat(prefixCls, "-footer"), modalClassNames === null || modalClassNames === void 0 ? void 0 : modalClassNames.footer),
@@ -21944,7 +21914,7 @@ var Panel = /* @__PURE__ */ React.forwardRef(function(props, ref) {
     "aria-labelledby": title ? ariaId : null,
     "aria-modal": "true",
     ref: mergedRef,
-    style: _objectSpread2(_objectSpread2({}, style2), contentStyle2),
+    style: _objectSpread2(_objectSpread2({}, style2), contentStyle),
     className: classNames(prefixCls, className),
     onMouseDown,
     onMouseUp
@@ -21964,9 +21934,9 @@ var Content$1 = /* @__PURE__ */ reactExports.forwardRef(function(props, ref) {
   var prefixCls = props.prefixCls, title = props.title, style2 = props.style, className = props.className, visible = props.visible, forceRender = props.forceRender, destroyOnClose = props.destroyOnClose, motionName = props.motionName, ariaId = props.ariaId, onVisibleChanged = props.onVisibleChanged, mousePosition2 = props.mousePosition;
   var dialogRef = reactExports.useRef();
   var _React$useState = reactExports.useState(), _React$useState2 = _slicedToArray$1(_React$useState, 2), transformOrigin = _React$useState2[0], setTransformOrigin = _React$useState2[1];
-  var contentStyle2 = {};
+  var contentStyle = {};
   if (transformOrigin) {
-    contentStyle2.transformOrigin = transformOrigin;
+    contentStyle.transformOrigin = transformOrigin;
   }
   function onPrepare() {
     var elementOffset = offset(dialogRef.current);
@@ -21989,7 +21959,7 @@ var Content$1 = /* @__PURE__ */ reactExports.forwardRef(function(props, ref) {
       ariaId,
       prefixCls,
       holderRef: motionRef,
-      style: _objectSpread2(_objectSpread2(_objectSpread2({}, motionStyle), style2), contentStyle2),
+      style: _objectSpread2(_objectSpread2(_objectSpread2({}, motionStyle), style2), contentStyle),
       className: classNames(className, motionClassName)
     }));
   });
@@ -25686,7 +25656,7 @@ const prepareComponentToken$3 = (token2) => {
     paragraphLiHeight: token2.controlHeight / 2
   };
 };
-const useStyle$5 = genStyleHooks("Skeleton", (token2) => {
+const useStyle$4 = genStyleHooks("Skeleton", (token2) => {
   const {
     componentCls,
     calc
@@ -25721,7 +25691,7 @@ const SkeletonAvatar = (props) => {
     getPrefixCls
   } = reactExports.useContext(ConfigContext);
   const prefixCls = getPrefixCls("skeleton", customizePrefixCls);
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle$5(prefixCls);
+  const [wrapCSSVar, hashId, cssVarCls] = useStyle$4(prefixCls);
   const otherProps = omit(props, ["prefixCls", "className"]);
   const cls = classNames(prefixCls, `${prefixCls}-element`, {
     [`${prefixCls}-active`]: active
@@ -25747,7 +25717,7 @@ const SkeletonButton = (props) => {
     getPrefixCls
   } = reactExports.useContext(ConfigContext);
   const prefixCls = getPrefixCls("skeleton", customizePrefixCls);
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle$5(prefixCls);
+  const [wrapCSSVar, hashId, cssVarCls] = useStyle$4(prefixCls);
   const otherProps = omit(props, ["prefixCls"]);
   const cls = classNames(prefixCls, `${prefixCls}-element`, {
     [`${prefixCls}-active`]: active,
@@ -25773,7 +25743,7 @@ const SkeletonImage = (props) => {
     getPrefixCls
   } = reactExports.useContext(ConfigContext);
   const prefixCls = getPrefixCls("skeleton", customizePrefixCls);
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle$5(prefixCls);
+  const [wrapCSSVar, hashId, cssVarCls] = useStyle$4(prefixCls);
   const cls = classNames(prefixCls, `${prefixCls}-element`, {
     [`${prefixCls}-active`]: active
   }, className, rootClassName, hashId, cssVarCls);
@@ -25804,7 +25774,7 @@ const SkeletonInput = (props) => {
     getPrefixCls
   } = reactExports.useContext(ConfigContext);
   const prefixCls = getPrefixCls("skeleton", customizePrefixCls);
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle$5(prefixCls);
+  const [wrapCSSVar, hashId, cssVarCls] = useStyle$4(prefixCls);
   const otherProps = omit(props, ["prefixCls"]);
   const cls = classNames(prefixCls, `${prefixCls}-element`, {
     [`${prefixCls}-active`]: active,
@@ -25830,7 +25800,7 @@ const SkeletonNode = (props) => {
     getPrefixCls
   } = reactExports.useContext(ConfigContext);
   const prefixCls = getPrefixCls("skeleton", customizePrefixCls);
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle$5(prefixCls);
+  const [wrapCSSVar, hashId, cssVarCls] = useStyle$4(prefixCls);
   const cls = classNames(prefixCls, `${prefixCls}-element`, {
     [`${prefixCls}-active`]: active
   }, hashId, className, rootClassName, cssVarCls);
@@ -25955,7 +25925,7 @@ const Skeleton = (props) => {
     style: contextStyle
   } = useComponentConfig("skeleton");
   const prefixCls = getPrefixCls("skeleton", customizePrefixCls);
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle$5(prefixCls);
+  const [wrapCSSVar, hashId, cssVarCls] = useStyle$4(prefixCls);
   if (loading || !("loading" in props)) {
     const hasAvatar = !!avatar;
     const hasTitle = !!title;
@@ -26544,7 +26514,7 @@ const prepareComponentToken$2 = (token2) => ({
   confirmIconMarginInlineEnd: token2.wireframe ? token2.margin : token2.marginSM,
   confirmBtnsMarginTop: token2.wireframe ? token2.marginLG : token2.marginSM
 });
-const useStyle$4 = genStyleHooks("Modal", (token2) => {
+const useStyle$3 = genStyleHooks("Modal", (token2) => {
   const modalToken = prepareToken(token2);
   return [genModalStyle(modalToken), genRTLStyle(modalToken), genModalMaskStyle(modalToken), initZoomMotion(modalToken, "zoom"), genResponsiveWidthStyle(modalToken)];
 }, prepareComponentToken$2, {
@@ -26618,7 +26588,7 @@ const Modal$1 = (props) => {
   const prefixCls = getPrefixCls("modal", customizePrefixCls);
   const rootPrefixCls = getPrefixCls();
   const rootCls = useCSSVarCls(prefixCls);
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle$4(prefixCls, rootCls);
+  const [wrapCSSVar, hashId, cssVarCls] = useStyle$3(prefixCls, rootCls);
   const wrapClassNameExtended = classNames(wrapClassName, {
     [`${prefixCls}-centered`]: centered !== null && centered !== void 0 ? centered : modalContext === null || modalContext === void 0 ? void 0 : modalContext.centered,
     [`${prefixCls}-wrap-rtl`]: direction === "rtl"
@@ -27646,7 +27616,7 @@ const prepareNotificationToken = (token2) => {
   });
   return notificationToken;
 };
-const useStyle$3 = genStyleHooks("Notification", (token2) => {
+const useStyle$2 = genStyleHooks("Notification", (token2) => {
   const notificationToken = prepareNotificationToken(token2);
   return [genNotificationStyle(notificationToken), genNotificationPlacementStyle(notificationToken), genStackStyle(notificationToken)];
 }, prepareComponentToken$1);
@@ -27737,7 +27707,7 @@ const PurePanel$2 = (props) => {
   const prefixCls = staticPrefixCls || getPrefixCls("notification");
   const noticePrefixCls = `${prefixCls}-notice`;
   const rootCls = useCSSVarCls(prefixCls);
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle$3(prefixCls, rootCls);
+  const [wrapCSSVar, hashId, cssVarCls] = useStyle$2(prefixCls, rootCls);
   return wrapCSSVar(/* @__PURE__ */ reactExports.createElement("div", {
     className: classNames(`${noticePrefixCls}-pure-panel`, hashId, className, cssVarCls, rootCls)
   }, /* @__PURE__ */ reactExports.createElement(PurePanelStyle, {
@@ -27843,7 +27813,7 @@ const Wrapper = ({
   prefixCls
 }) => {
   const rootCls = useCSSVarCls(prefixCls);
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle$3(prefixCls, rootCls);
+  const [wrapCSSVar, hashId, cssVarCls] = useStyle$2(prefixCls, rootCls);
   return wrapCSSVar(/* @__PURE__ */ React.createElement(NotificationProvider, {
     classNames: {
       list: classNames(hashId, cssVarCls, rootCls)
@@ -28141,7 +28111,7 @@ const prepareComponentToken = (token2) => {
   };
 };
 const DEPRECATED_TOKENS = [["colorBgBody", "bodyBg"], ["colorBgHeader", "headerBg"], ["colorBgTrigger", "triggerBg"]];
-const useStyle$2 = genStyleHooks("Layout", (token2) => [genLayoutStyle(token2)], prepareComponentToken, {
+const useStyle$1 = genStyleHooks("Layout", (token2) => [genLayoutStyle(token2)], prepareComponentToken, {
   deprecatedTokens: DEPRECATED_TOKENS
 });
 const genSiderStyle = (token2) => {
@@ -28251,7 +28221,7 @@ const genSiderStyle = (token2) => {
     }
   };
 };
-const useStyle$1 = genStyleHooks(["Layout", "Sider"], (token2) => [genSiderStyle(token2)], prepareComponentToken, {
+const useStyle = genStyleHooks(["Layout", "Sider"], (token2) => [genSiderStyle(token2)], prepareComponentToken, {
   deprecatedTokens: DEPRECATED_TOKENS
 });
 var __rest$3 = function(s, e) {
@@ -28318,7 +28288,7 @@ const Sider = /* @__PURE__ */ reactExports.forwardRef((props, ref) => {
     direction
   } = reactExports.useContext(ConfigContext);
   const prefixCls = getPrefixCls("layout-sider", customizePrefixCls);
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle$1(prefixCls);
+  const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
   const responsiveHandlerRef = reactExports.useRef(null);
   responsiveHandlerRef.current = (mql) => {
     setBelow(mql.matches);
@@ -28474,7 +28444,7 @@ const InternalSpace = /* @__PURE__ */ reactExports.forwardRef((props, ref) => {
   });
   const mergedAlign = align === void 0 && direction === "horizontal" ? "center" : align;
   const prefixCls = getPrefixCls("space", customizePrefixCls);
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle$7(prefixCls);
+  const [wrapCSSVar, hashId, cssVarCls] = useStyle$6(prefixCls);
   const cls = classNames(prefixCls, contextClassName, hashId, `${prefixCls}-${direction}`, {
     [`${prefixCls}-rtl`]: directionConfig === "rtl",
     [`${prefixCls}-align-${mergedAlign}`]: mergedAlign,
@@ -28566,7 +28536,7 @@ const Basic = /* @__PURE__ */ reactExports.forwardRef((props, ref) => {
     getPrefixCls
   } = reactExports.useContext(ConfigContext);
   const prefixCls = getPrefixCls("layout", customizePrefixCls);
-  const [wrapSSR, hashId, cssVarCls] = useStyle$2(prefixCls);
+  const [wrapSSR, hashId, cssVarCls] = useStyle$1(prefixCls);
   const prefixWithSuffixCls = suffixCls ? `${prefixCls}-${suffixCls}` : prefixCls;
   return wrapSSR(/* @__PURE__ */ reactExports.createElement(TagName, Object.assign({
     className: classNames(customizePrefixCls || prefixWithSuffixCls, className, hashId, cssVarCls),
@@ -28595,7 +28565,7 @@ const BasicLayout = /* @__PURE__ */ reactExports.forwardRef((props, ref) => {
   } = useComponentConfig("layout");
   const prefixCls = getPrefixCls("layout", customizePrefixCls);
   const mergedHasSider = useHasSider(siders, children, hasSider);
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle$2(prefixCls);
+  const [wrapCSSVar, hashId, cssVarCls] = useStyle$1(prefixCls);
   const classString = classNames(prefixCls, {
     [`${prefixCls}-has-sider`]: mergedHasSider,
     [`${prefixCls}-rtl`]: direction === "rtl"
@@ -28878,7 +28848,7 @@ const PurePanel = (props) => {
   const rootPrefixCls = getPrefixCls();
   const prefixCls = customizePrefixCls || getPrefixCls("modal");
   const rootCls = useCSSVarCls(rootPrefixCls);
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle$4(prefixCls, rootCls);
+  const [wrapCSSVar, hashId, cssVarCls] = useStyle$3(prefixCls, rootCls);
   const confirmPrefixCls = `${prefixCls}-confirm`;
   let additionalProps = {};
   if (type4) {
@@ -31609,182 +31579,13 @@ var styleInstance = createInstance({
   speedy: false
 });
 var createStyles = styleInstance.createStyles;
-const useStyle = createStyles(({ prefixCls, css }) => ({
-  gradientButton: css`
-    &.${prefixCls}-btn-primary:not([disabled]):not(.${prefixCls}-btn-dangerous) {
-      > span {
-        position: relative;
-      }
-
-      &::before {
-        content: '';
-        background: linear-gradient(135deg, #ff6a00, #ff9900);
-        position: absolute;
-        inset: -1px;
-        opacity: 1;
-        transition: all 0.3s;
-        border-radius: inherit;
-        z-index: -1;
-      }
-
-      &:hover::before {
-        opacity: 0.8;
-      }
-
-      background-color: transparent !important;
-      border: none;
-    }
-  `,
-  outlineButton: css`
-    &.${prefixCls}-btn {
-      background-color: #0d0d0d !important;
-      border: 1px solid #ff6a00 !important;
-      color: #ff6a00 !important;
-      transition: all 0.3s ease;
-    }
-
-    &.${prefixCls}-btn:hover {
-      background-color: #1a1a1a !important;
-      color: #ffffff !important;
-      border-color: #ff9900 !important;
-    }
-  `
-}));
-const headerStyle = {
-  textAlign: "center",
-  padding: "50px 0",
-  background: " #0d0d0d",
-  position: "sticky",
-  top: 0,
-  width: "100%",
-  display: "flex",
-  zIndex: 1e3,
-  justifyContent: "space-around",
-  alignItems: "center"
+export {
+  Button as B,
+  ConfigProvider as C,
+  Layout as L,
+  Space as S,
+  clientExports as a,
+  createStyles as c,
+  jsxRuntimeExports as j,
+  reactExports as r
 };
-function AppHeader() {
-  const { styles } = useStyle();
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Layout.Header, { style: headerStyle, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "logo", children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", style: { alignItems: "center", display: "flex" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: "./Logo-header.png", alt: "Logo", style: { height: 70 } }) }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { className: "nav-list", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Home" }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Titles" }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "New" }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "About" }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Contancts" }) })
-    ] }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(ConfigProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Space, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Button,
-        {
-          size: "large",
-          className: styles.outlineButton,
-          children: "Sign In"
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Button,
-        {
-          type: "primary",
-          size: "large",
-          className: styles.gradientButton,
-          children: "Sign Up"
-        }
-      )
-    ] }) })
-  ] });
-}
-function GlassBlock({ srcS, id, description }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: {
-    display: "flex",
-    flexDirection: id % 2 === 0 ? "row" : "row-reverse",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: 40,
-    flexWrap: "wrap",
-    padding: "40px 20px"
-  }, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "glass-box", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "video",
-      {
-        autoPlay: true,
-        muted: true,
-        loop: true,
-        playsInline: true,
-        style: {
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          opacity: ".7"
-        },
-        children: /* @__PURE__ */ jsxRuntimeExports.jsx("source", { src: srcS, type: "video/webm" })
-      }
-    ) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
-      maxWidth: "400px",
-      color: "#fff",
-      fontSize: "18px",
-      lineHeight: "1.6",
-      textAlign: id % 2 === 0 ? "left" : "right",
-      textTransform: "uppercase",
-      color: "#ff6a00",
-      fontWeight: 900,
-      fontSize: "2rem",
-      letterSpacing: 1.2,
-      textShadow: "0 0 18px rgba(255, 106, 0, 0.6)"
-    }, children: description })
-  ] });
-}
-const editData = [
-  {
-    id: 1,
-    srcS: "Edit.webm",
-    Description: "Some moments deserve to be eternal."
-  },
-  {
-    id: 2,
-    srcS: "Edit2.webm",
-    Description: "Feel the beat, live the story."
-  },
-  {
-    id: 3,
-    srcS: "Edit3.webm",
-    Description: "Between light and shadow lives emotion."
-  }
-];
-function GlassWrapper() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "edit-wrapper", children: editData.map((edit) => /* @__PURE__ */ jsxRuntimeExports.jsx(GlassBlock, { srcS: edit.srcS, id: edit.id, description: edit.Description }, edit.id)) });
-}
-const contentStyle = {
-  textAlign: "center",
-  minHeight: 120,
-  color: "#fff",
-  background: "linear-gradient(135deg, #0d0d0d, #1a1a1a)",
-  padding: 20
-};
-function AppContent() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Layout.Content, { style: contentStyle, children: /* @__PURE__ */ jsxRuntimeExports.jsx(GlassWrapper, {}) });
-}
-const footerStyle = {
-  textAlign: "center",
-  color: "#fff",
-  backgroundColor: "#4096ff"
-};
-function AppFooter() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Layout.Footer, { style: footerStyle, children: "Footer" });
-}
-const layoutStyle = {
-  borderRadius: 8,
-  width: "100vw",
-  minHeight: "100vh"
-};
-function App() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Layout, { style: layoutStyle, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(AppHeader, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(AppContent, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(AppFooter, {})
-  ] }) });
-}
-clientExports.createRoot(document.getElementById("root")).render(
-  /* @__PURE__ */ jsxRuntimeExports.jsx(reactExports.StrictMode, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}) })
-);

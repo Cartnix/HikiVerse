@@ -32,8 +32,14 @@ export function GlassBlock({ srcS, id, description }) {
                 fontSize: '18px',
                 lineHeight: '1.6',
                 textAlign: id % 2 === 0 ? 'left' : 'right',
+                textTransform: 'uppercase',
+                color: '#ff6a00',
+                fontWeight: 900,
+                fontSize: '2rem',
+                letterSpacing: 1.2,
+                textShadow: '0 0 18px rgba(255, 106, 0, 0.6)'
             }}>
-                {description}
+                <h3>{description}</h3>
             </div>
         </div>
     )

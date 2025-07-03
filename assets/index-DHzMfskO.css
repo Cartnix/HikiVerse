@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Russo+One&display=swap');
 
 :root {
   font-family: "Orbitron", sans-serif;
@@ -15,48 +15,31 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+h1,h2,h3,h4,h5,h6,a{
+  font-family: "Russo One", sans-serif;
+  text-transform: uppercase;
 }
 
 h1 {
   font-size: 3.2em;
-  line-height: 1.1;
+  line-height: 1.5;
+  text-align: left;
+  margin-bottom: 0.5rem;
 }
 
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  padding: 0.6rem 1.2rem;
+  color: #fff;
+  font-size: 1.5rem;
+  background: linear-gradient(135deg, #ff6a00, #ff9900);
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: all .3s;
+  border: none !important;
 }
 
 button:hover {
-  border-color: #646cff;
-}
-
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  opacity: .8;
 }
 
 @media (prefers-color-scheme: light) {
@@ -64,12 +47,7 @@ button:focus-visible {
     color: #213547;
     background-color: #ffffff;
   }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+
 }
 body,
 html,
@@ -78,6 +56,14 @@ html,
   padding: 0;
   width: 100%;
   overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
 }
 
 ul,
@@ -122,4 +108,30 @@ li a:hover {
   box-shadow: 0 0px 42px rgba(255, 140, 0, 1);
   scale: 1.05;
   cursor: pointer;
+}.circle-wrapper {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blur-background {
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff6a00, #ff9900);
+  filter: blur(30px);
+  z-index: 0;
+}
+
+.character {
+  position: relative;
+  width: 160%;
+  right: 50px;
+  height: auto;
+  z-index: 1;
 }

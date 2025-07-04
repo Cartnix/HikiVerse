@@ -5,6 +5,7 @@ html,
   padding: 0;
   width: 100%;
   overflow-x: hidden;
+  user-select: none;
 }
 
 body {
@@ -26,7 +27,7 @@ ol {
 ul,
 ol li a {
   text-decoration: none;
-  color: #fff;
+  color: var(--color-text);
 }
 
 li {
@@ -34,11 +35,11 @@ li {
 }
 
 li a {
-  color: #ff6a00;
+  color: var(--color-accent);
 }
 
 li a:hover {
-  color: #ffaa33;
+  color: var(--color-hover);
 
 }
 
@@ -46,9 +47,9 @@ form {
   width: 60%;
   align-self: center;
   padding: 40px;
-  background-color: #000;
-  border: 1px solid #ff6a00;
-  box-shadow: 0 8px 32px rgba(255, 102, 0, 0.9);
+  background-color: var(--color-header);
+  border: 1px solid var(--color-accent);
+  box-shadow: 0 8px 32px var(--color-shadow);
   border-radius: 20px;
 }
 
@@ -56,12 +57,13 @@ input,
 textarea {
   padding: 10px;
   border-radius: 10px;
-  border: 1px solid #000;
+  border: 1px solid var(--color-header);
   resize: none;
+  background-color: var(--color-input);
 }
 
 input:focus,
 textarea:focus {
-  border: 1px solid #ff6a00;
+  border: 1px solid var(--color-accent);
   outline: none; 
 }

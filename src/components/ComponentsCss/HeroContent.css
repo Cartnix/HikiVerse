@@ -13,7 +13,7 @@
   width: 150%;
   height: 150%;
   border-radius: 50%;
-  background: linear-gradient(135deg, #ff6a00, #ff9900);
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent2));
   filter: blur(30px);
   z-index: 0;
 }

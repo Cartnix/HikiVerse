@@ -1,15 +1,15 @@
 import { Layout } from 'antd';
-import { GlassWrapper } from '../components/glassWrapper';
-import HeroContent from '../components/HeroContent';
-import AutoScrollSlider from '../components/SliderApp';
-import StatsApp from '../components/StatsApp';
-import FormApp from '../components/Forn';
+import { GlassWrapper } from '../components/MainPage/GlassBlocks/glassWrapper';
+import HeroContent from '../components/MainPage/HeroContent';
+import AutoScrollSlider from '../components/MainPage/Slider/SliderApp';
+import StatsApp from '../components/MainPage/StatsApp';
+import FormApp from '../components/MainPage/Forn';
 
 const contentStyle = {
     textAlign: 'center',
     minHeight: 120,
-    color: '#fff',
-    background: 'linear-gradient(135deg, #0d0d0d, #1a1a1a)',
+    color: 'var(--color-text)',
+    background: 'var(--color-bg2)',
     display: 'flex',
     flexDirection: 'column',
     gap: 150,
@@ -25,6 +25,5 @@ export default function AppContent() {
             <GlassWrapper/>
             <FormApp/>
         </Layout.Content>
-
     )
 }

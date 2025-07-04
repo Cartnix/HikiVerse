@@ -9,7 +9,7 @@ export const useStyle = createStyles(({ prefixCls, css }) => ({
 
       &::before {
         content: '';
-        background: linear-gradient(135deg, #ff6a00, #ff9900);
+        background: linear-gradient(135deg, var(--color-accent), var(--color-accent2));
         position: absolute;
         inset: -1px;
         opacity: 1;
@@ -29,16 +29,16 @@ export const useStyle = createStyles(({ prefixCls, css }) => ({
 
   outlineButton: css`
     &.${prefixCls}-btn {
-      background-color: #0d0d0d !important;
-      border: 1px solid #ff6a00 !important;
-      color: #ff6a00 !important;
+      background-color: var(--color-header) !important;
+      border: 1px solid var(--color-accent) !important;
+      color: var(--color-accent) !important;
       transition: all 0.3s ease;
     }
 
     &.${prefixCls}-btn:hover {
-      background-color: #1a1a1a !important;
-      color: #ffffff !important;
-      border-color: #ff9900 !important;
+      background-color: var(--color-bg2) !important;
+      color: var(--color-text) !important;
+      border-color: var(--color-accent2) !important;
     }
   `,
 }));

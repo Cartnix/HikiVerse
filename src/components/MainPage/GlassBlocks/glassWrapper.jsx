@@ -1,5 +1,5 @@
 import { GlassBlock } from "./glassBlock";
-import { editData } from "../assets/glassData";
+import { editData } from "../../../assets/glassData";
 
 export function GlassWrapper() {
     return (

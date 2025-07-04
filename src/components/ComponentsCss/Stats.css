@@ -15,8 +15,8 @@
 .statDivider {
     width: 3px;
     height: 170px;
-    background: #ff5722;
-    box-shadow: 0 0 10px rgba(255,87,34, 1);
+    background: var(--color-accent);
+    box-shadow: 0 0 10px var(--color-shadow);
     opacity: 0.7;
     border-radius: 2px;
     margin: 0 10px;
@@ -26,12 +26,12 @@
 .statValue {
     font-size: 3rem;
     font-weight: bold;
-    color: #ff5722;
-    text-shadow: 0 0 10px rgba(255,87,34, 1);
+    color: var(--color-accent);
+    text-shadow: 0 0 10px var(--color-shadow);
 }
 .statLabel {
     font-size: 1.2rem;
-    color: #5f5757;
+    color: var(--color-mini-labels);
     text-align: center;
     margin-top: 10px;
 }

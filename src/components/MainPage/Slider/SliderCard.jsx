@@ -6,9 +6,9 @@ export default function SliderCard({ title, description, image }) {
             alignItems: 'center',
             height: 450,
             width: 300,
-            backgroundColor: 'rgba(20, 20, 20, 0.8)',
-            border: '1px solid rgba(255, 87, 34, 0.4)',
-            boxShadow: '0 0 8px rgba(255, 87, 34, 0.5), 0 0 16px rgba(255, 87, 34, 0.2)',
+            backgroundColor: 'var(--color-card)',
+            border: '1px solid var(--color-border)',
+            boxShadow: '0 0 8px var(--color-deep-shadow1), 0 0 16px var(--color-deep-shadow2)',
             backdropFilter: 'blur(6px)',
             borderRadius: 16,
             padding: 20,
@@ -29,15 +29,15 @@ export default function SliderCard({ title, description, image }) {
                 <h2 style={{
                     margin: 0,
                     fontSize: '20px',
-                    color: '#ff5722',
-                    textShadow: '0 0 10px rgba(255,87,34, 1)'
+                    color: 'var(--color-accent)',
+                    textShadow: '0 0 10px var(--color-shadow)'
                 }}>{title}</h2>
 
                 <p style={{
                     marginTop: 8,
                     fontSize: '14px',
                     lineHeight: 1.4,
-                    color: '#ddd'
+                    color: 'var(--color-text)'
                 }}>{description}</p>
             </div>
         </div>

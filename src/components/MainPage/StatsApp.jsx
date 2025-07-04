@@ -1,5 +1,5 @@
-import { statsData } from "../assets/Stats";
-import './ComponentsCss/Stats.css';
+import { statsData } from "../../assets/Stats";
+import '../ComponentsCss/Stats.css';
 
 export default function StatsApp() {
     return (

@@ -1,11 +1,13 @@
 import { Layout } from 'antd';
 import { Button, ConfigProvider, Space } from 'antd';
 import { useStyle } from '../hooks/useStyle';
+import { useTheme } from '../hooks/useTheme';
+import { Moon, Sun } from 'lucide-react';
 
 const headerStyle = {
     textAlign: 'center',
     padding: '50px 0',
-    background: '#0d0d0d',
+    background: 'var(--color-header)',
     position: 'sticky',
     width: '100%',
     display: 'flex',
@@ -22,7 +24,7 @@ const gradientLine = {
     left: 0,
     width: '100%',
     height: 5,
-    background: 'linear-gradient(90deg, #ff6a00 0%, #ff9900 100%)',
+    background: 'linear-gradient(90deg, var(--color-accent) 0%, var(--color-accent2) 100%)',
     borderRadius: '0 0 8px 8px',
     zIndex: 2,
 };
@@ -31,6 +33,7 @@ const gradientLine = {
 export default function AppHeader() {
 
     const { styles } = useStyle();
+    const { theme, toggleTheme } = useTheme();
 
     return (
         <Layout.Header style={headerStyle}>
@@ -42,11 +45,13 @@ export default function AppHeader() {
             </div>
             <nav className="nav-list">
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Titles</a></li>
-                    <li><a href="#">New</a></li>
                     <li><a href="#">About</a></li>
-                    <li><a href="#">Contancts</a></li>
+                    <li><a href="#">New</a></li>
+                    <li><a href="#">Titles</a></li>
+                    <li><a href="#">Contacts</a></li>
+                    <div onClick={toggleTheme} style={{cursor: 'pointer', display: 'flex', alignItems: 'center'}}>
+                        {theme === 'light' ? <Sun /> : <Moon />}
+                    </div>
                 </ul>
             </nav>
             <ConfigProvider>

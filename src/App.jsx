@@ -1,5 +1,6 @@
 import { Layout } from 'antd';
 import './App.css'
+import './components/ComponentsCss/theme.css'
 import AppHeader from './Layout/AppHeader';
 import AppContent from './Layout/AppContent';
 import AppFooter from './Layout/AppFooter';
@@ -10,9 +11,7 @@ const layoutStyle = {
   minHeight: '100vh'
 };
 
-
 function App() {
-
   return (
     <>
       <Layout style={layoutStyle}>

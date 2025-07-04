@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
-import { sliderCards } from '../assets/sliderData'
+import { sliderCards } from '../../../assets/sliderData'
 import SliderCard from './SliderCard'
-import './ComponentsCss/SliderStyle.css'
+import '../../ComponentsCss/SliderStyle.css'
 
 export default function AutoScrollSlider() {
   const [offset, setOffset] = useState(0)

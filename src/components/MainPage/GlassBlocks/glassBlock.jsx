@@ -1,4 +1,4 @@
-import './ComponentsCss/GlassBoxStyle.css'
+import '../../ComponentsCss/GlassBoxStyle.css'
 
 export function GlassBlock({ srcS, id, description }) {
     return (
@@ -30,16 +30,15 @@ export function GlassBlock({ srcS, id, description }) {
 
             <div style={{
                 maxWidth: '400px',
-                color: '#fff',
                 fontSize: '18px',
                 lineHeight: '1.6',
                 textAlign: id % 2 === 0 ? 'left' : 'right',
                 textTransform: 'uppercase',
-                color: '#ff6a00',
+                color: 'var(--color-accent2)',
                 fontWeight: 900,
                 fontSize: '2rem',
                 letterSpacing: 1.2,
-                textShadow: '0 0 10px rgba(255,87,34, 1)',
+                textShadow: '0 0 10px var(--color-shadow)',
             }}>
             <h3>{description}</h3>
         </div>

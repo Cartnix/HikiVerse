@@ -5,17 +5,19 @@
   line-height: 1.5;
   font-weight: 600;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1,h2,h3,h4,h5,h6,a{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a {
   font-family: "Russo One", sans-serif;
   text-transform: uppercase;
 }
@@ -30,9 +32,9 @@ h1 {
 button {
   border-radius: 8px;
   padding: 0.8rem 1.2rem;
-  color: #fff;
+  color: var(--color-text);
   font-size: 1.5rem;
-  background: linear-gradient(135deg, #ff6a00, #ff9900);
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent2));
   cursor: pointer;
   transition: all .3s;
   border: none !important;
@@ -42,10 +44,15 @@ button:hover {
   opacity: .8;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
+.iconsR {
+  width: 28px;
+  height: 28px;
+  margin: 0 8px;
+  vertical-align: middle;
+  filter: drop-shadow(0 0 4px var(--color-shadow));
+}
 
+.iconsR:hover {
+  scale: 1.15;
+  filter: drop-shadow(0 0 4px var(--color-shadow-hover));
 }

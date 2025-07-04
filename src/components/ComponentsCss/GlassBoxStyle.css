@@ -2,7 +2,7 @@
   width: 250px;
   height: 250px;
   border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(255, 102, 0, 0.9);
+  box-shadow: 0 8px 32px var(--color-shadow);
   backdrop-filter: blur(12px);
   position: relative;
   overflow: hidden;
@@ -10,7 +10,7 @@
 }
 
 .glass-box:hover {
-  box-shadow: 0 0px 42px rgba(255, 140, 0, 1);
+  box-shadow: 0 0px 42px var(--color-shadow-hover);
   scale: 1.05;
   cursor: pointer;
 }

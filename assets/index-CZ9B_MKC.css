@@ -29,7 +29,7 @@ h1 {
 
 button {
   border-radius: 8px;
-  padding: 0.6rem 1.2rem;
+  padding: 0.8rem 1.2rem;
   color: #fff;
   font-size: 1.5rem;
   background: linear-gradient(135deg, #ff6a00, #ff9900);
@@ -92,7 +92,6 @@ li a:hover {
   color: #ffaa33;
 
 }
-
 .glass-box {
   width: 250px;
   height: 250px;
@@ -134,4 +133,61 @@ li a:hover {
   right: 50px;
   height: auto;
   z-index: 1;
+}
+
+.slider-wrapper {
+  overflow: hidden;
+  width: 100dvw;
+}
+
+.slider-track {
+  display: flex;
+  width: max-content;
+  overflow: hidden;
+  height: 460px; 
+  transition: transform 0.2s linear;
+}
+
+.slide {
+  flex: 0 0 auto; 
+  width: 300px; 
+  margin-right: 20px; 
+  height: 370px; 
+}
+.statCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+}
+
+.statsContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.statDivider {
+    width: 3px;
+    height: 170px;
+    background: #ff5722;
+    box-shadow: 0 0 10px rgba(255,87,34, 1);
+    opacity: 0.7;
+    border-radius: 2px;
+    margin: 0 10px;
+    align-self: stretch;
+}
+
+.statValue {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ff5722;
+    text-shadow: 0 0 10px rgba(255,87,34, 1);
+}
+.statLabel {
+    font-size: 1.2rem;
+    color: #5f5757;
+    text-align: center;
+    margin-top: 10px;
 }

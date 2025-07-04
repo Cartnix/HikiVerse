@@ -1,3 +1,5 @@
+import './ComponentsCss/GlassBoxStyle.css'
+
 export function GlassBlock({ srcS, id, description }) {
     return (
         <div style={{

@@ -1,6 +1,8 @@
 import { Layout } from 'antd';
 import { GlassWrapper } from '../components/glassWrapper';
 import HeroContent from '../components/HeroContent';
+import AutoScrollSlider from '../components/SliderApp';
+import StatsApp from '../components/StatsApp';
 
 const contentStyle = {
     textAlign: 'center',
@@ -10,7 +12,6 @@ const contentStyle = {
     display: 'flex',
     flexDirection: 'column',
     gap: 150,
-    
     padding: "80px 20px",
 };
 
@@ -18,6 +19,8 @@ export default function AppContent() {
     return (
         <Layout.Content style={contentStyle}>
             <HeroContent/>
+            <AutoScrollSlider/>
+            <StatsApp/>
             <GlassWrapper/>
         </Layout.Content>
 

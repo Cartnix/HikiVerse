@@ -1,0 +1,19 @@
+.slider-wrapper {
+  overflow: hidden;
+  width: 100dvw;
+}
+
+.slider-track {
+  display: flex;
+  width: max-content;
+  overflow: hidden;
+  height: 460px; 
+  transition: transform 0.2s linear;
+}
+
+.slide {
+  flex: 0 0 auto; 
+  width: 300px; 
+  margin-right: 20px; 
+  height: 370px; 
+}

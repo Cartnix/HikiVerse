@@ -14,6 +14,7 @@
   "dependencies": {
     "antd": "^5.26.3",
     "antd-style": "^3.7.1",
+    "keen-slider": "^6.8.6",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },

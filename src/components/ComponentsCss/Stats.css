@@ -1,0 +1,37 @@
+.statCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+}
+
+.statsContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.statDivider {
+    width: 3px;
+    height: 170px;
+    background: #ff5722;
+    box-shadow: 0 0 10px rgba(255,87,34, 1);
+    opacity: 0.7;
+    border-radius: 2px;
+    margin: 0 10px;
+    align-self: stretch;
+}
+
+.statValue {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ff5722;
+    text-shadow: 0 0 10px rgba(255,87,34, 1);
+}
+.statLabel {
+    font-size: 1.2rem;
+    color: #5f5757;
+    text-align: center;
+    margin-top: 10px;
+}

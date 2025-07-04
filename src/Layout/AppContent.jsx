@@ -3,6 +3,7 @@ import { GlassWrapper } from '../components/glassWrapper';
 import HeroContent from '../components/HeroContent';
 import AutoScrollSlider from '../components/SliderApp';
 import StatsApp from '../components/StatsApp';
+import FormApp from '../components/Forn';
 
 const contentStyle = {
     textAlign: 'center',
@@ -22,6 +23,7 @@ export default function AppContent() {
             <AutoScrollSlider/>
             <StatsApp/>
             <GlassWrapper/>
+            <FormApp/>
         </Layout.Content>
 
     )

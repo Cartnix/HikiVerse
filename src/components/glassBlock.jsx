@@ -39,10 +39,10 @@ export function GlassBlock({ srcS, id, description }) {
                 fontWeight: 900,
                 fontSize: '2rem',
                 letterSpacing: 1.2,
-                textShadow: '0 0 18px rgba(255, 106, 0, 0.6)'
+                textShadow: '0 0 10px rgba(255,87,34, 1)',
             }}>
-                <h3>{description}</h3>
-            </div>
+            <h3>{description}</h3>
         </div>
+        </div >
     )
 }

@@ -2,21 +2,21 @@ export const statsData = [
   {
 
     value: '150+',
-    label: 'Эдитов',
+    label: 'Edits',
   },
   {
 
-    value: '5 лет',
-    label: 'В монтаже',
+    value: '5 years',
+    label: 'Web developing',
   },
   {
 
     value: '30K+',
-    label: 'Просмотров',
+    label: 'Views',
   },
   {
 
     value: '3',
-    label: 'Проекта в работе',
+    label: 'Projects in process',
   },
 ]

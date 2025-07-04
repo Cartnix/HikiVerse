@@ -5,14 +5,26 @@ import { useStyle } from '../hooks/useStyle';
 const headerStyle = {
     textAlign: 'center',
     padding: '50px 0',
-    background: ' #0d0d0d',
+    background: '#0d0d0d',
     position: 'sticky',
-    top: 0,
     width: '100%',
     display: 'flex',
     zIndex: 1000,
     justifyContent: 'space-around',
     alignItems: 'center',
+};
+
+const gradientLine = {
+    content: '""',
+    display: 'block',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    width: '100%',
+    height: 5,
+    background: 'linear-gradient(90deg, #ff6a00 0%, #ff9900 100%)',
+    borderRadius: '0 0 8px 8px',
+    zIndex: 2,
 };
 
 
@@ -22,6 +34,7 @@ export default function AppHeader() {
 
     return (
         <Layout.Header style={headerStyle}>
+            <div style={gradientLine}></div>
             <div className="logo">
                 <a href="#" style={{ alignItems: 'center', display: 'flex' }}>
                     <img src="./Logo-header.png" alt="Logo" style={{ height: 70, }} />

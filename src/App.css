@@ -41,3 +41,27 @@ li a:hover {
   color: #ffaa33;
 
 }
+
+form {
+  width: 60%;
+  align-self: center;
+  padding: 40px;
+  background-color: #000;
+  border: 1px solid #ff6a00;
+  box-shadow: 0 8px 32px rgba(255, 102, 0, 0.9);
+  border-radius: 20px;
+}
+
+input,
+textarea {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #000;
+  resize: none;
+}
+
+input:focus,
+textarea:focus {
+  border: 1px solid #ff6a00;
+  outline: none; 
+}

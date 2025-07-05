@@ -4,6 +4,7 @@
   border-radius: 20px;
   box-shadow: 0 8px 32px var(--color-shadow);
   backdrop-filter: blur(12px);
+  z-index: 5;
   position: relative;
   overflow: hidden;
   transition: .3s ease-in-out;

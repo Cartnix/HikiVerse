@@ -1,10 +1,8 @@
 :root {
     --color-bg2: #1a1a1a;
-    --color-accent: #ff6a00;
-    /*For TITLES*/
+    --color-accent: #ff6a00;   /*For TITLES*/
     --color-hover: #ffaa33;
-    --color-accent2: #ff9900;
-    /*LINES AND ETC*/
+    --color-accent2: #ff9900;  /*LINES AND ETC*/
     --color-text: #ddd;
     --color-header: #0d0d0d;
     --color-input: #1a1a1a;

@@ -57,11 +57,9 @@ button:hover {
   filter: drop-shadow(0 0 4px var(--color-shadow-hover));
 }:root {
     --color-bg2: #1a1a1a;
-    --color-accent: #ff6a00;
-    /*For TITLES*/
+    --color-accent: #ff6a00;   /*For TITLES*/
     --color-hover: #ffaa33;
-    --color-accent2: #ff9900;
-    /*LINES AND ETC*/
+    --color-accent2: #ff9900;  /*LINES AND ETC*/
     --color-text: #ddd;
     --color-header: #0d0d0d;
     --color-input: #1a1a1a;
@@ -162,6 +160,7 @@ textarea:focus {
   border-radius: 20px;
   box-shadow: 0 8px 32px var(--color-shadow);
   backdrop-filter: blur(12px);
+  z-index: 5;
   position: relative;
   overflow: hidden;
   transition: .3s ease-in-out;

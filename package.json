@@ -32,7 +32,7 @@
     "gh-pages": "^6.3.0",
     "globals": "^16.2.0",
     "javascript-obfuscator": "^4.1.1",
-    "rollup-plugin-javascript-obfuscator": "^1.0.4",
+    "rollup-plugin-javascript-obfuscator": "^1.0.1",
     "vite": "^7.0.0",
     "vite-plugin-bundle-obfuscator": "^1.7.0",
     "vite-plugin-obfuscator": "^1.0.5"

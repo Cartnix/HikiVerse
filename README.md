@@ -43,3 +43,4 @@ A modern and responsive anime catalog landing page. This project serves as a pra
 ```
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
+![React](https://img.shields.io/badge/React-19.1.0-61DAFB?logo=react&logoColor=white)
